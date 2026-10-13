@@ -1,6 +1,17 @@
 {
+   "manifest_version": 3,
+   "name": "FlowKit for Power Automate",
+   "short_name": "FlowKit",
+   "version": "1.6",
+   "description": "Edit, debug and document Power Automate flows: JSON editor, run history, review before save, connector overview and docs export.",
+   "icons": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+   },
    "action": {
-      "default_title": "Power Automate Tools",
+      "default_title": "FlowKit",
       "default_icon": {
          "16": "icons/icon-16.png",
          "32": "icons/icon-32.png"
@@ -9,27 +20,16 @@
    "background": {
       "service_worker": "background.js"
    },
-   "description": "This extension enables editing a Power Automate flow definition as JSON.",
+   "permissions": [
+      "webRequest",
+      "tabs",
+      "storage"
+   ],
    "host_permissions": [
       "*://*.flow.microsoft.com/",
       "*://*.make.powerautomate.com/",
       "*://*.make.powerapps.com/",
       "*://*.api.powerplatform.com/",
       "https://*.logic.azure.com/*"
-   ],
-   "icons": {
-      "16": "icons/icon-16.png",
-      "32": "icons/icon-32.png",
-      "48": "icons/icon-48.png",
-      "128": "icons/icon-128.png"
-   },
-   "manifest_version": 3,
-   "name": "Power Automate Tools",
-   "permissions": [
-      "activeTab",
-      "webRequest",
-      "tabs",
-      "storage"
-   ],
-   "version": "1.5"
+   ]
 }
