@@ -1,5 +1,7 @@
-# Power-Automate-Tools
-Verbeterde versie van de Power Automate Tools extensie die online beschikbaar is met nieuwe features en fixes.
+# FlowKit for Power Automate
+Browserextensie om Power Automate cloudflows te bewerken, debuggen en documenteren. Gebaseerd op de extensie Power Automate Tools, met nieuwe functies en fixes.
+
+Zie [PRIVACY.md](PRIVACY.md) voor de privacyverklaring en [STORE-LISTING.md](STORE-LISTING.md) voor de teksten voor de Chrome Web Store.
 
 ## Installeren
 1. Ga in Chrome of Edge naar `chrome://extensions` (of `edge://extensions`).
@@ -10,6 +12,9 @@ Deze versie heeft een eigen extensie-ID en kan naast de originele extensie geïn
 
 ## Icoon
 De bronbestanden van het icoon staan in `design`: `icon.svg` voor 48px en groter, `icon-small.svg` als vereenvoudigde variant voor 16 en 32px. De 256 en 512px versies zijn bedoeld voor de Web Store-vermelding.
+
+## Wijzigingen in 1.6
+Nieuwe naam FlowKit en een eigen icoon. Het ongebruikte recht `activeTab` is verwijderd en de JSON-editor haalt geen schema's meer van internet op, omdat die al in de extensie zitten.
 
 ## Wijzigingen in 1.5
 **Run-geschiedenis.** Via "Run history" zie je de laatste runs met status en duur, te filteren op status. Open een run en je ziet per actie de status, foutmelding en duur, gesorteerd op uitvoervolgorde. Bij een mislukte run staan direct alleen de probleemacties open. Per actie kun je de inputs en outputs bekijken, kopiëren of downloaden, naar de actie in de editor springen en bij lussen de afzonderlijke iteraties bekijken.

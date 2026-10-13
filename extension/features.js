@@ -1020,7 +1020,7 @@
     renderSteps(analysis.steps, 0);
     md.push("");
 
-    const footer = `Gegenereerd met Power Automate Tools op ${new Date().toLocaleString("nl-NL")}.`;
+    const footer = `Gegenereerd met FlowKit op ${new Date().toLocaleString("nl-NL")}.`;
     md.push("---", "", `*${footer}*`, "");
     html.push(`<hr><p class="footer">${h(footer)}</p>`);
 

@@ -239,11 +239,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       state.appTabId = sender.tab.id;
       save();
       sendTokenToApp();
-      return;
-    }
-    if (sender.tab.id !== state.appTabId) return;
-    if (message.type === "refresh" && state.initiatorTabId !== undefined) {
-      chrome.tabs.reload(state.initiatorTabId).catch(() => {});
     }
   });
 });
