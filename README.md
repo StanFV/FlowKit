@@ -1,7 +1,7 @@
 # FlowKit for Power Automate
 Browserextensie om Power Automate cloudflows te bewerken, debuggen en documenteren. Gebaseerd op de extensie Power Automate Tools, met nieuwe functies en fixes.
 
-Zie [PRIVACY.md](PRIVACY.md) voor de privacyverklaring en [STORE-LISTING.md](STORE-LISTING.md) voor de teksten voor de Chrome Web Store.
+Zie [PRIVACY.md](PRIVACY.md) voor de privacyverklaring.
 
 ## Installeren
 1. Ga in Chrome of Edge naar `chrome://extensions` (of `edge://extensions`).
