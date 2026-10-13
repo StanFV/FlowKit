@@ -1,6 +1,10 @@
 {
    "action": {
-      "default_title": "Power Automate Tools"
+      "default_title": "Power Automate Tools",
+      "default_icon": {
+         "16": "icons/icon-16.png",
+         "32": "icons/icon-32.png"
+      }
    },
    "background": {
       "service_worker": "background.js"
@@ -10,15 +14,15 @@
       "*://*.flow.microsoft.com/",
       "*://*.make.powerautomate.com/",
       "*://*.make.powerapps.com/",
-      "*://*.api.powerplatform.com/"
+      "*://*.api.powerplatform.com/",
+      "https://*.logic.azure.com/*"
    ],
    "icons": {
-      "128": "icons/pa-tools-128.png",
-      "256": "icons/pa-tools-256.png",
-      "48": "icons/pa-tools-48.png",
-      "512": "icons/pa-tools-512.png"
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
    },
-   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJEv4lbLw2KXPoZGBHlM4cCbk64dg0SpwM7zde0FECYerGTMPa9qxHKQ/3YgoBpFjCLVp8WjjzQJDT/UyPY01Evgt/YctBLpuIigg2vbVkAwSya+cCT0E+RRZC7cQ6hSDot9Wp6nGRHAXYUz5tjrqWBj/HdcBpj3OYYFYcGdSAYelp8GHSSd5OhPkhXfXwpAJ/UC3iSo03v+9FTXvrqksSwYjhmwi896XLeBSPeykLSYjAsEJCj3D7JfCJasaTDT8uUkwVIzIhGoS9W/sSRGEYE5EyaNApQdpUZyqo5thRYJkWMk6pV1yKQrvCXRoo85fKwP+ivWlhX1vdSK72sZXwIDAQAB",
    "manifest_version": 3,
    "name": "Power Automate Tools",
    "permissions": [
@@ -27,5 +31,5 @@
       "tabs",
       "storage"
    ],
-   "version": "1.4"
+   "version": "1.5"
 }
