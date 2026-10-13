@@ -1,0 +1,31 @@
+{
+   "action": {
+      "default_title": "Power Automate Tools"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "description": "This extension enables editing a Power Automate flow definition as JSON.",
+   "host_permissions": [
+      "*://*.flow.microsoft.com/",
+      "*://*.make.powerautomate.com/",
+      "*://*.make.powerapps.com/",
+      "*://*.api.powerplatform.com/"
+   ],
+   "icons": {
+      "128": "icons/pa-tools-128.png",
+      "256": "icons/pa-tools-256.png",
+      "48": "icons/pa-tools-48.png",
+      "512": "icons/pa-tools-512.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJEv4lbLw2KXPoZGBHlM4cCbk64dg0SpwM7zde0FECYerGTMPa9qxHKQ/3YgoBpFjCLVp8WjjzQJDT/UyPY01Evgt/YctBLpuIigg2vbVkAwSya+cCT0E+RRZC7cQ6hSDot9Wp6nGRHAXYUz5tjrqWBj/HdcBpj3OYYFYcGdSAYelp8GHSSd5OhPkhXfXwpAJ/UC3iSo03v+9FTXvrqksSwYjhmwi896XLeBSPeykLSYjAsEJCj3D7JfCJasaTDT8uUkwVIzIhGoS9W/sSRGEYE5EyaNApQdpUZyqo5thRYJkWMk6pV1yKQrvCXRoo85fKwP+ivWlhX1vdSK72sZXwIDAQAB",
+   "manifest_version": 3,
+   "name": "Power Automate Tools",
+   "permissions": [
+      "activeTab",
+      "webRequest",
+      "tabs",
+      "storage"
+   ],
+   "version": "1.4"
+}
