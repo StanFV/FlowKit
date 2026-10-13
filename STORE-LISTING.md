@@ -36,7 +36,7 @@ Dit bestand bevat de teksten voor het Chrome Web Store Developer Dashboard. De v
 
 **Icon:** `extension/icons/icon-128.png`
 
-**Screenshots:** minimaal 1, maximaal 5, formaat 1280x800 of 640x400. Voorstel: de editor met een flow, de run-geschiedenis met een mislukte run, het venster "Review changes before saving", het connectoroverzicht en het documentatievoorbeeld. Gebruik een testflow zonder klantgegevens.
+**Screenshots:** vijf screenshots van 1280x800 staan in `design/store-screenshots`. Upload ze in deze volgorde: editor, run-geschiedenis, wijzigingen controleren, connectoren, documentatie. Ze zijn gemaakt met een fictieve demoflow van Contoso, dus zonder klantgegevens.
 
 **Small promo tile** (optioneel, 440x280): kan worden gemaakt op basis van `design/icon.svg`.
 
