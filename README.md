@@ -6,7 +6,10 @@ Verbeterde versie van de Power Automate Tools extensie die online beschikbaar is
 2. Zet Ontwikkelaarsmodus aan.
 3. Kies "Uitgepakte extensie laden" en selecteer de map `extension`.
 
-Schakel de originele extensie uit de Web Store uit, beide gebruiken dezelfde extensie-ID.
+Deze versie heeft een eigen extensie-ID en kan naast de originele extensie geïnstalleerd worden.
+
+## Icoon
+De bronbestanden van het icoon staan in `design`: `icon.svg` voor 48px en groter, `icon-small.svg` als vereenvoudigde variant voor 16 en 32px. De 256 en 512px versies zijn bedoeld voor de Web Store-vermelding.
 
 ## Wijzigingen in 1.5
 **Run-geschiedenis.** Via "Run history" zie je de laatste runs met status en duur, te filteren op status. Open een run en je ziet per actie de status, foutmelding en duur, gesorteerd op uitvoervolgorde. Bij een mislukte run staan direct alleen de probleemacties open. Per actie kun je de inputs en outputs bekijken, kopiëren of downloaden, naar de actie in de editor springen en bij lussen de afzonderlijke iteraties bekijken.
