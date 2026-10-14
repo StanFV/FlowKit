@@ -60,7 +60,7 @@ Download the result as HTML (opens in Word) or Markdown. The documentation is cu
 If you see a message asking you to refresh the page, refresh the tab with the flow in Power Automate and click the icon again.
 
 ## Installation
-Until FlowKit is available in the browser stores, install it as follows:
+FlowKit is available in the Edge extension store: https://microsoftedge.microsoft.com/addons/detail/flowkit-for-power-automat/dnmgemfeoliemchipdahobicmelkdkoh. But you can also install it as follows:
 
 1. Download or clone this repository.
 2. Go to `chrome://extensions` in Chrome or `edge://extensions` in Edge.
