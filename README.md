@@ -1,86 +1,86 @@
 <p align="center">
-  <img src="design/icon-256.png" alt="FlowKit icoon" width="96" height="96">
+  <img src="design/icon-256.png" alt="FlowKit icon" width="96" height="96">
 </p>
 
 <h1 align="center">FlowKit for Power Automate</h1>
 
 <p align="center">
-  Bewerk, debug en documenteer je Power Automate cloudflows vanuit één browserextensie.
+  Edit, debug and document your Power Automate cloud flows from a single browser extension.
 </p>
 
-FlowKit opent de flow die je in Power Automate bekijkt in een volledige JSON-editor. Daar zie je ook de run-geschiedenis, controleer je wijzigingen voor het opslaan, zie je welke connectoren en licenties de flow nodig heeft en genereer je documentatie. De extensie werkt in Chrome en Microsoft Edge.
+FlowKit opens the flow you are viewing in Power Automate in a full JSON editor. From there you can browse the run history, review your changes before saving, see which connectors and licences the flow needs and generate documentation. The extension works in Chrome and Microsoft Edge.
 
-![De FlowKit-editor met een flow als JSON](design/store-screenshots/1-editor.png)
+![The FlowKit editor showing a flow as JSON](design/store-screenshots/1-editor.png)
 
-## Functies
+## Features
 
-### JSON-editor
-Bewerk de volledige flowdefinitie inclusief connection references in een editor met IntelliSense en schemavalidatie voor de workflowtaal van Power Automate. Vanuit de werkbalk kun je:
+### JSON editor
+Edit the complete flow definition including connection references in an editor with IntelliSense and schema validation for the Power Automate workflow definition language. From the toolbar you can:
 
-- **Save**: de flow opslaan in Power Automate, na een controle van je wijzigingen.
-- **Validate**: de flowcontrole van Power Automate uitvoeren op je aangepaste definitie, met fouten en waarschuwingen in een apart paneel.
-- **Download JSON**: de definitie als `<flownaam>.json` opslaan, bijvoorbeeld als back-up of om te delen.
+- **Save**: save the flow to Power Automate after reviewing your changes.
+- **Validate**: run the Power Automate flow checker on your edited definition, with errors and warnings shown in a separate panel.
+- **Download JSON**: save the definition as `<flow name>.json`, for example as a backup or to share it.
 
-### Run-geschiedenis
-Debug mislukte runs zonder de editor te verlaten. Je ziet de laatste runs met status en duur, te filteren op status. Open een run en je krijgt per actie de status, de foutmelding en de duur, in de volgorde waarin de acties zijn uitgevoerd. Bij een mislukte run staan direct alleen de probleemacties open.
+### Run history
+Debug failed runs without leaving the editor. You see the most recent runs with their status and duration, and you can filter them on status. Open a run to get the status, error message and duration of every action, in the order in which the actions ran. When a run has failed, only the actions with problems are shown at first.
 
-Per actie kun je de inputs en outputs bekijken, kopiëren of downloaden. Met "Show in editor" spring je naar die actie in de JSON. Bij een lus zie je de afzonderlijke iteraties, met een filter op de iteraties die niet gelukt zijn. Een link opent dezelfde run in Power Automate.
+For every action you can view, copy or download the inputs and outputs. "Show in editor" takes you straight to that action in the JSON. For loops you see the individual iterations, with a filter for the iterations that did not succeed. A link opens the same run in Power Automate.
 
-![Run-geschiedenis met een mislukte actie en de outputs](design/store-screenshots/2-run-history.png)
+![Run history with a failed action and its outputs](design/store-screenshots/2-run-history.png)
 
-### Wijzigingen controleren voor het opslaan
-Voordat FlowKit iets opslaat, zie je een vergelijking naast elkaar van de geladen versie en jouw versie. Pas als je op "Save to Power Automate" klikt, wordt de flow echt bijgewerkt. Zo voorkom je dat een onbedoelde wijziging in productie belandt.
+### Review changes before saving
+Before FlowKit saves anything, you see a side by side comparison of the loaded version and your version. The flow is only updated once you click "Save to Power Automate", so an unintended change never ends up in production.
 
-![Vergelijking van wijzigingen voor het opslaan](design/store-screenshots/3-review-changes.png)
+![Comparison of changes before saving](design/store-screenshots/3-review-changes.png)
 
-### Connectoren en licenties
-Een overzicht van alle connectoren die de flow gebruikt, met het licentieniveau (Standard of Premium), het aantal acties en de connection reference. Klik op een connector om te zien welke acties hem gebruiken en spring daarmee naar de editor. Premium ingebouwde onderdelen zoals de HTTP-actie en de trigger "When a HTTP request is received" staan apart. Bovenaan zie je in één oogopslag of de flow een premium licentie nodig heeft.
+### Connectors and licences
+An overview of every connector the flow uses, with its licence tier (Standard or Premium), the number of actions and the connection reference. Click a connector to see which actions use it and jump to them in the editor. Premium built-in actions such as the HTTP action and the "When a HTTP request is received" trigger are listed separately. At the top you see at a glance whether the flow needs a premium licence.
 
-Het licentieniveau wordt opgehaald bij Power Automate. Lukt dat niet, dan gebruikt FlowKit een ingebouwde lijst en staat er een sterretje bij.
+The licence tier is retrieved from Power Automate. If that is not possible, FlowKit falls back to a built-in list and marks the tier with an asterisk.
 
-![Overzicht van connectoren en licentieniveaus](design/store-screenshots/4-connectors.png)
+![Overview of connectors and licence tiers](design/store-screenshots/4-connectors.png)
 
-### Documentatie genereren
-Maak in een paar seconden leesbare documentatie van een flow, bijvoorbeeld voor overdracht aan een klant of collega. De documentatie is Nederlandstalig en bevat:
+### Documentation export
+Create readable documentation of a flow in seconds, for example when handing a flow over to a customer or colleague. The documentation contains:
 
-- algemene gegevens zoals omgeving, status en licentiebehoefte
-- de trigger met schema en triggervoorwaarden
-- de gebruikte connectoren en variabelen
-- alle stappen in uitvoervolgorde, met voorwaarden, Ja/Nee-takken, notities en afwijkende "uitvoeren na"-instellingen
+- general details such as environment, status and licence requirements
+- the trigger with its schedule and trigger conditions
+- the connectors and variables used
+- every step in execution order, including conditions, Yes/No branches, notes and non-default "run after" settings
 
-Download het resultaat als HTML (te openen in Word) of als Markdown.
+Download the result as HTML (opens in Word) or Markdown. The documentation is currently generated in Dutch.
 
-![Voorbeeld van gegenereerde documentatie](design/store-screenshots/5-documentation.png)
+![Preview of generated documentation](design/store-screenshots/5-documentation.png)
 
-## Gebruik
-1. Open een flow in [Power Automate](https://make.powerautomate.com), bijvoorbeeld de detailpagina of de designer.
-2. Klik op het FlowKit-icoon in de werkbalk van je browser. Het icoon is alleen actief op een pagina met een flow.
-3. De flow opent in een nieuw tabblad met de editor en alle functies.
+## Usage
+1. Open a flow in [Power Automate](https://make.powerautomate.com), for example its details page or the designer.
+2. Click the FlowKit icon in your browser toolbar. The icon is only active on a page that shows a flow.
+3. The flow opens in a new tab with the editor and all tools.
 
-Krijg je de melding dat de pagina vernieuwd moet worden, vernieuw dan het tabblad met de flow in Power Automate en klik opnieuw op het icoon.
+If you see a message asking you to refresh the page, refresh the tab with the flow in Power Automate and click the icon again.
 
-## Installeren
-Totdat FlowKit in de Chrome Web Store staat, installeer je de extensie zo:
+## Installation
+Until FlowKit is available in the browser stores, install it as follows:
 
-1. Download of clone deze repository.
-2. Ga in Chrome naar `chrome://extensions` of in Edge naar `edge://extensions`.
-3. Zet de ontwikkelaarsmodus aan.
-4. Kies "Uitgepakte extensie laden" en selecteer de map `extension`.
+1. Download or clone this repository.
+2. Go to `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+3. Turn on developer mode.
+4. Choose "Load unpacked" and select the `extension` folder.
 
 ## Privacy
-FlowKit heeft geen eigen servers en verzamelt geen gegevens. De extensie gebruikt je bestaande Power Automate-sessie om namens jou de API's van Microsoft aan te roepen. Tokens worden alleen in het geheugen van de browser bewaard en nergens anders heen gestuurd dan naar Microsoft. Lees de volledige [privacyverklaring](PRIVACY.md).
+FlowKit has no servers of its own and does not collect any data. The extension uses your existing Power Automate session to call Microsoft's APIs on your behalf. Tokens are kept in browser memory only and are never sent anywhere other than Microsoft. Read the full [privacy policy](PRIVACY.md).
 
-## Projectstructuur
+## Project structure
 
-| Map of bestand | Inhoud |
+| Folder or file | Contents |
 | --- | --- |
-| `extension/` | De extensie zelf, klaar om te laden of te zippen voor de Web Store |
-| `extension/background.js` | Herkent flowpagina's en beheert de sessie |
-| `extension/features.js` | Run-geschiedenis, wijzigingen controleren, connectoren en documentatie |
-| `design/` | Bronbestanden van het icoon (`icon.svg`, `icon-small.svg` voor 16 en 32px) en grote versies voor de Web Store |
-| `design/store-screenshots/` | Screenshots voor de Web Store en deze README |
+| `extension/` | The extension itself, ready to load or to zip for the stores |
+| `extension/background.js` | Detects flow pages and manages the session |
+| `extension/features.js` | Run history, change review, connectors and documentation |
+| `design/` | Icon source files (`icon.svg`, plus `icon-small.svg` for 16 and 32px) and large versions for the stores |
+| `design/store-screenshots/` | Screenshots for the stores and this README |
 
-## Verantwoording
-FlowKit is gebaseerd op de extensie Power Automate Tools en uitgebreid met nieuwe functies en fixes.
+## Acknowledgements
+FlowKit is based on the Power Automate Tools extension and extends it with new features and fixes.
 
-FlowKit is niet gelieerd aan of goedgekeurd door Microsoft. Power Automate is een handelsmerk van de Microsoft-groep.
+FlowKit is not affiliated with or endorsed by Microsoft. Power Automate is a trademark of the Microsoft group of companies.
