@@ -48,11 +48,11 @@ You can remove all data the extension holds at any time by closing the browser, 
 
 ## Changes to this policy
 
-Changes are published in this file in the [source repository](https://github.com/StanFV/Power-Automate-Tools), with the date at the top updated.
+Changes are published in this file in the [source repository](https://github.com/StanFV/FlowKit), with the date at the top updated.
 
 ## Contact
 
-Questions about this policy can be submitted as an issue at <https://github.com/StanFV/Power-Automate-Tools/issues>.
+Questions about this policy can be submitted as an issue at <https://github.com/StanFV/FlowKit/issues>.
 
 ---
 
@@ -106,8 +106,8 @@ Je kunt alle gegevens die de extensie bewaart op elk moment verwijderen door de 
 
 ## Wijzigingen in deze verklaring
 
-Wijzigingen worden in dit bestand gepubliceerd in de [broncode-repository](https://github.com/StanFV/Power-Automate-Tools). De datum bovenaan wordt dan aangepast.
+Wijzigingen worden in dit bestand gepubliceerd in de [broncode-repository](https://github.com/StanFV/FlowKit). De datum bovenaan wordt dan aangepast.
 
 ## Contact
 
-Vragen over deze verklaring kun je stellen via een issue op <https://github.com/StanFV/Power-Automate-Tools/issues>.
+Vragen over deze verklaring kun je stellen via een issue op <https://github.com/StanFV/FlowKit/issues>.
