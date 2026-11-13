@@ -7,6 +7,9 @@
   const params = new URLSearchParams(location.search);
   const envId = params.get("envId");
   const flowId = params.get("flowId");
+  // Agent flows opened from Copilot Studio are billed through Copilot Studio
+  // capacity instead of a Power Automate licence.
+  const isAgentFlow = params.get("source") === "copilotstudio";
   const LEGACY_VERSION = "2016-11-01";
 
   const api = { apiUrl: null, apiToken: null, legacyApiUrl: null, legacyToken: null };
@@ -654,6 +657,15 @@
         connectors.set(apiName, { apiName, displayName: null, iconUri: null, tier: null, tierSource: null, references: new Set(), operations: [] });
       }
       const connector = connectors.get(apiName);
+      // Agent flows (and some solution flows) carry connector details in the
+      // connection reference itself.
+      const raw = references[key] || {};
+      if (!connector.displayName && raw.displayName) connector.displayName = raw.displayName;
+      if (!connector.iconUri && raw.iconUri) connector.iconUri = raw.iconUri;
+      if (!connector.tier && (raw.tier === "Standard" || raw.tier === "Premium")) {
+        connector.tier = raw.tier;
+        connector.tierSource = "reference";
+      }
       connector.references.add(key + (ref.connection && ref.connection !== key ? ` → ${ref.connection}` : ""));
       return connector;
     };
@@ -732,6 +744,7 @@
   async function enrichConnectors(connectors) {
     await Promise.all(
       connectors.map(async (connector) => {
+        if (connector.tierSource === "reference") return;
         if (api.legacyApiUrl && api.legacyToken && envId) {
           try {
             const result = await fetchJson(
@@ -786,7 +799,16 @@
 
     const premiumConnectors = analysis.connectors.filter((c) => c.tier === "Premium");
     const isPremium = premiumConnectors.length > 0 || analysis.builtInPremium.length > 0;
-    body.appendChild(
+    const premiumNames = [...premiumConnectors.map(connectorName), ...analysis.builtInPremium.map((b) => b.type)].filter((v, i, a) => a.indexOf(v) === i);
+    if (isAgentFlow) {
+      body.appendChild(
+        message(
+          "This is a Copilot Studio agent flow. Agent flows are billed through Copilot Studio capacity for each action they run, not through a Power Automate licence." +
+            (isPremium ? ` Premium functionality used: ${premiumNames.join(", ")}.` : ""),
+          "info"
+        )
+      );
+    } else body.appendChild(
       message(
         isPremium
           ? `This flow uses premium functionality (${[...premiumConnectors.map(connectorName), ...analysis.builtInPremium.map((b) => b.type)].filter((v, i, a) => a.indexOf(v) === i).join(", ")}). Running it requires a Power Automate Premium, Process or per-flow licence, or a licence that includes premium connectors.`
@@ -947,7 +969,10 @@
       ["Aangemaakt", meta.created],
       ["Laatst gewijzigd", meta.modified],
       ["Aantal acties", String(analysis.actionCount)],
-      ["Premium licentie nodig", meta.premium ? "Ja" : "Nee"],
+      ["Type", meta.agentFlow ? "Agent flow (Copilot Studio)" : "Cloudflow (Power Automate)"],
+      meta.agentFlow
+        ? ["Licentie", "Copilot Studio-capaciteit per uitgevoerde actie"]
+        : ["Premium licentie nodig", meta.premium ? "Ja" : "Nee"],
     ].filter(([, v]) => v);
     md.push("## Algemeen", "", "| Eigenschap | Waarde |", "| --- | --- |", ...general.map(([k, v]) => `| ${k} | ${mdCell(v)} |`), "");
     html.push("<h2>Algemeen</h2><table>", ...general.map(([k, v]) => `<tr><th>${h(k)}</th><td>${h(v)}</td></tr>`), "</table>");
@@ -1053,6 +1078,7 @@
       environment: (ctx.environment && (ctx.environment.name || ctx.environment.id)) || envId,
       flowId,
       premium: analysis.connectors.some((c) => c.tier === "Premium") || analysis.builtInPremium.length > 0,
+      agentFlow: isAgentFlow,
     };
     if (api.apiUrl && api.apiToken) {
       try {

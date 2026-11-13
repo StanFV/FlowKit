@@ -8,7 +8,7 @@
   Edit, debug and document your Power Automate cloud flows from a single browser extension.
 </p>
 
-FlowKit opens the flow you are viewing in Power Automate in a full JSON editor. From there you can browse the run history, review your changes before saving, see which connectors and licences the flow needs and generate documentation. The extension works in Chrome and Microsoft Edge.
+FlowKit opens the flow you are viewing in Power Automate or Copilot Studio in a full JSON editor. From there you can browse the run history, review your changes before saving, see which connectors and licences the flow needs and generate documentation. The extension works in Chrome and Microsoft Edge.
 
 ![The FlowKit editor showing a flow as JSON](design/store-screenshots/1-editor.png)
 
@@ -58,6 +58,9 @@ Download the result as HTML (opens in Word) or Markdown. The documentation is cu
 3. The flow opens in a new tab with the editor and all tools.
 
 If you see a message asking you to refresh the page, refresh the tab with the flow in Power Automate and click the icon again.
+
+### Copilot Studio agent flows
+FlowKit also works with agent flows in [Copilot Studio](https://copilotstudio.microsoft.com). Open an agent flow in the designer and click the FlowKit icon. Because the page addresses in Copilot Studio differ from those in Power Automate, FlowKit recognises the flow from the requests the designer makes. If the icon stays inactive, wait until the designer has fully loaded. For agent flows the connector overview and documentation take into account that agent flows are billed through Copilot Studio capacity instead of a Power Automate licence. Support for agent flows is new; please report any problems as an issue.
 
 ## Installation
 FlowKit is available in the Edge extension store: https://microsoftedge.microsoft.com/addons/detail/flowkit-for-power-automat/dnmgemfeoliemchipdahobicmelkdkoh. But you can also install it as follows:

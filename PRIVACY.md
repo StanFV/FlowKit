@@ -1,6 +1,6 @@
 # FlowKit for Power Automate: Privacy Policy
 
-*Last updated: 13 October 2026*
+*Last updated: 13 November 2026*
 
 [Nederlandse versie hieronder](#nederlands)
 
@@ -18,7 +18,7 @@ FlowKit has no servers of its own. It does not collect, store, sell or share any
 - sent only to the Microsoft API from which it was obtained;
 - never written to disk by the extension, logged or sent to the developer or any other party.
 
-**Page addresses (URLs).** FlowKit reads the address of your tabs to recognise when a Power Automate flow is open (for example `make.powerautomate.com/environments/.../flows/...`). Only the environment ID and flow ID are used, to know which flow to open. Addresses are not stored beyond the browser session and are not sent anywhere.
+**Page addresses (URLs).** FlowKit reads the address of your tabs to recognise when a Power Automate flow or Copilot Studio agent flow is open (for example `make.powerautomate.com/environments/.../flows/...` or a flow page on `copilotstudio.microsoft.com`). Only the environment ID and flow ID are used, to know which flow to open. Addresses are not stored beyond the browser session and are not sent anywhere.
 
 **Flow content and run history.** When you use the editor, run history, connector overview or documentation export, FlowKit retrieves your flow definition, run history, run inputs and outputs and connector details from Microsoft. This content is shown to you in the extension and is only kept in memory while the editor tab is open. Files you download (JSON, HTML or Markdown) are saved by your browser on your own device.
 
@@ -60,7 +60,7 @@ Questions about this policy can be submitted as an issue at <https://github.com/
 
 # FlowKit for Power Automate: Privacyverklaring
 
-*Laatst bijgewerkt: 13 oktober 2026*
+*Laatst bijgewerkt: 13 november 2026*
 
 FlowKit for Power Automate ("FlowKit", "de extensie") is een browserextensie waarmee je je eigen Power Automate cloudflows kunt bekijken, bewerken, debuggen en documenteren. Deze verklaring legt uit welke gegevens de extensie verwerkt en wat ermee gebeurt.
 
@@ -76,7 +76,7 @@ FlowKit heeft geen eigen servers. De extensie verzamelt, bewaart, verkoopt of de
 - alleen verstuurd naar de Microsoft-API waar het vandaan komt;
 - nooit door de extensie op schijf opgeslagen, gelogd of naar de ontwikkelaar of anderen gestuurd.
 
-**Webadressen (URL's).** FlowKit leest het adres van je tabbladen om te herkennen wanneer er een Power Automate-flow open staat (bijvoorbeeld `make.powerautomate.com/environments/.../flows/...`). Alleen de omgevings-ID en flow-ID worden gebruikt, om te weten welke flow geopend moet worden. Adressen worden niet langer bewaard dan de browsersessie en nergens heen gestuurd.
+**Webadressen (URL's).** FlowKit leest het adres van je tabbladen om te herkennen wanneer er een Power Automate-flow of Copilot Studio agent flow open staat (bijvoorbeeld `make.powerautomate.com/environments/.../flows/...` of een flowpagina op `copilotstudio.microsoft.com`). Alleen de omgevings-ID en flow-ID worden gebruikt, om te weten welke flow geopend moet worden. Adressen worden niet langer bewaard dan de browsersessie en nergens heen gestuurd.
 
 **Inhoud van flows en run-geschiedenis.** Als je de editor, de run-geschiedenis, het connectoroverzicht of de documentatie-export gebruikt, haalt FlowKit je flowdefinitie, run-geschiedenis, inputs en outputs van runs en connectorgegevens op bij Microsoft. Deze inhoud wordt alleen in de extensie aan jou getoond en alleen in het geheugen bewaard zolang het editortabblad open is. Bestanden die je downloadt (JSON, HTML of Markdown) worden door je browser op je eigen apparaat opgeslagen.
 
