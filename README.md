@@ -5,10 +5,15 @@
 <h1 align="center">FlowKit for Power Automate</h1>
 
 <p align="center">
-  Edit, debug and document your Power Automate cloud flows from a single browser extension.
+  Edit, debug and document your Power Automate cloud flows and Copilot Studio agent flows from a single browser extension.
 </p>
 
-FlowKit opens the flow you are viewing in Power Automate or Copilot Studio in a full JSON editor. From there you can browse the run history, review your changes before saving, see which connectors and licences the flow needs and generate documentation. The extension works in Chrome and Microsoft Edge.
+FlowKit opens the flow you are viewing in a full JSON editor. From there you can browse the run history, review your changes before saving, see which connectors and licences the flow needs and generate documentation. The extension works in Chrome and Microsoft Edge.
+
+| Works with | Where |
+| --- | --- |
+| **Power Automate** cloud flows | [make.powerautomate.com](https://make.powerautomate.com) and solutions in [make.powerapps.com](https://make.powerapps.com) |
+| **Copilot Studio** agent flows | [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com) |
 
 ![The FlowKit editor showing a flow as JSON](design/store-screenshots/1-editor.png)
 
@@ -52,15 +57,17 @@ Download the result as HTML (opens in Word) or Markdown. The documentation is cu
 
 ![Preview of generated documentation](design/store-screenshots/5-documentation.png)
 
+### Copilot Studio agent flows
+FlowKit works the same way with agent flows in Copilot Studio. Open an agent flow in the Copilot Studio designer, click the FlowKit icon and the flow opens in the editor with all tools: the JSON editor, run history, change review, connector overview and documentation export.
+
+FlowKit knows when a flow comes from Copilot Studio. The connector overview and the documentation then take into account that agent flows are billed through Copilot Studio capacity for each action they run, instead of through a Power Automate licence.
+
 ## Usage
-1. Open a flow in [Power Automate](https://make.powerautomate.com), for example its details page or the designer.
+1. Open a flow in [Power Automate](https://make.powerautomate.com), for example its details page or the designer, or open an agent flow in the [Copilot Studio](https://copilotstudio.microsoft.com) designer.
 2. Click the FlowKit icon in your browser toolbar. The icon is only active on a page that shows a flow.
 3. The flow opens in a new tab with the editor and all tools.
 
-If you see a message asking you to refresh the page, refresh the tab with the flow in Power Automate and click the icon again.
-
-### Copilot Studio agent flows
-FlowKit also works with agent flows in [Copilot Studio](https://copilotstudio.microsoft.com). Open an agent flow in the designer and click the FlowKit icon. Because the page addresses in Copilot Studio differ from those in Power Automate, FlowKit recognises the flow from the requests the designer makes. If the icon stays inactive, wait until the designer has fully loaded. For agent flows the connector overview and documentation take into account that agent flows are billed through Copilot Studio capacity instead of a Power Automate licence. Support for agent flows is new; please report any problems as an issue.
+If you see a message asking you to refresh the page, refresh the tab with the flow and click the icon again. In Copilot Studio FlowKit recognises the flow once the designer has loaded it, so if the icon stays inactive, wait a moment until the designer has fully loaded.
 
 ## Installation
 FlowKit is available in the Edge extension store: https://microsoftedge.microsoft.com/addons/detail/flowkit-for-power-automat/dnmgemfeoliemchipdahobicmelkdkoh. But you can also install it as follows:
