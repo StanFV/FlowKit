@@ -50,30 +50,52 @@ function getFlowFromTabUrl(url) {
   return match ? { envId, flowId: match[1] } : null;
 }
 
+// Copilot Studio (agent flows) does not document its URLs, so flows opened
+// there are recognised from the Power Automate API calls the designer makes.
+function isCopilotStudioUrl(url) {
+  try {
+    return /(^|\.)copilotstudio\.(preview\.)?microsoft\.com$/i.test(new URL(url).hostname);
+  } catch (e) {
+    return false;
+  }
+}
+
+// `primary` marks a request for the flow itself (…/flows/{id} without a sub
+// path), which is what a designer does when it opens a flow. Sub resources
+// such as …/flows/{id}/runs are also requested on overview pages.
 function getFlowFromRequestUrl(url) {
   if (!url) return null;
+  const end = "(\\/[^?#]*)?(?:[?#]|$)";
   const legacy = new RegExp(
-    `\\/providers\\/Microsoft\\.ProcessSimple\\/environments\\/([^/]+)\\/flows\\/(${GUID})`,
+    `\\/providers\\/Microsoft\\.ProcessSimple\\/environments\\/([^/]+)\\/flows\\/(${GUID})${end}`,
     "i"
   ).exec(url);
-  if (legacy) return { envId: legacy[1], flowId: legacy[2] };
+  if (legacy) return { envId: legacy[1], flowId: legacy[2], primary: !legacy[3] };
   const modern = new RegExp(
-    `\\.api\\.powerplatform\\.com\\/powerautomate\\/flows\\/(${GUID})`,
+    `\\.api\\.powerplatform\\.com\\/powerautomate\\/flows\\/(${GUID})${end}`,
     "i"
   ).exec(url);
-  return modern ? { envId: null, flowId: modern[1] } : null;
+  return modern ? { envId: null, flowId: modern[1], primary: !modern[2] } : null;
 }
 
 // The tab URL is the most reliable source: it always points at the flow that
 // is currently open. Requests seen by webRequest are the fallback.
 function resolveFlow(tab) {
-  const fromUrl = getFlowFromTabUrl(tab && tab.url);
-  if (fromUrl) return fromUrl;
   const tabState = tab && tab.id !== undefined ? state.tabs[tab.id] : undefined;
   const last = tabState && tabState.lastMatchedRequest;
-  if (!last || !last.flowId) return null;
-  const envId = last.envId || getEnvIdFromUrl(tab && tab.url);
-  return envId ? { envId, flowId: last.flowId } : null;
+  const fromRequest = () => {
+    if (!last || !last.flowId) return null;
+    const envId = last.envId || getEnvIdFromUrl(tab && tab.url);
+    return envId ? { envId, flowId: last.flowId } : null;
+  };
+  // In Copilot Studio the IDs in the page URL are not necessarily the flow's
+  // API name, so the flow the designer loaded wins. Only pages about flows
+  // count, to avoid picking up flows an agent page merely lists.
+  if (isCopilotStudioUrl(tab && tab.url)) {
+    if (!/flow/i.test(new URL(tab.url).pathname)) return null;
+    return fromRequest() || getFlowFromTabUrl(tab.url);
+  }
+  return getFlowFromTabUrl(tab && tab.url) || fromRequest();
 }
 
 function updateActionForTab(tab) {
@@ -149,7 +171,32 @@ chrome.action.onClicked.addListener((tab) => {
 // changes the URL without new matching API calls, so watch URL changes too.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (!changeInfo.url && changeInfo.status !== "complete") return;
-  ready.then(() => updateActionForTab(tab));
+  ready.then(() => {
+    // A flow seen on the previous Copilot Studio page must not stick to the
+    // next one; the designer requests the new flow after navigating.
+    const tabState = state.tabs[tabId];
+    if (changeInfo.url && tabState && tabState.lastMatchedRequest && isCopilotStudioUrl(changeInfo.url)) {
+      const path = (u) => {
+        try {
+          return new URL(u).pathname;
+        } catch (e) {
+          return u;
+        }
+      };
+      if (path(changeInfo.url) !== tabState.lastUrlPath) {
+        delete tabState.lastMatchedRequest;
+        save();
+      }
+    }
+    if (tabState && changeInfo.url) {
+      try {
+        tabState.lastUrlPath = new URL(changeInfo.url).pathname;
+      } catch (e) {
+        // ignore
+      }
+    }
+    updateActionForTab(tab);
+  });
 });
 
 chrome.tabs.onActivated.addListener(({ tabId }) => {
@@ -170,10 +217,9 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   });
 });
 
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  (details) => {
-    if (details.tabId < 0) return;
-    ready.then(() => {
+function handleApiRequest(details) {
+  if (details.tabId < 0) return Promise.resolve();
+  return ready.then(() => {
       if (state.appTabId === details.tabId) return;
 
       const tabState = getTabState(details.tabId);
@@ -182,11 +228,14 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       const matched = getFlowFromRequestUrl(details.url);
       if (matched) {
         const prev = tabState.lastMatchedRequest;
-        if (!prev || prev.flowId !== matched.flowId || (matched.envId && prev.envId !== matched.envId)) {
-          tabState.lastMatchedRequest = {
-            envId: matched.envId || (prev && prev.flowId === matched.flowId ? prev.envId : null),
-            flowId: matched.flowId,
-          };
+        const sameFlow = prev && prev.flowId === matched.flowId;
+        // A request for a sub resource of another flow never replaces a flow
+        // that was explicitly loaded.
+        const replace = !prev || matched.primary || !prev.primary || sameFlow;
+        const envId = matched.envId || (sameFlow ? prev.envId : null);
+        const primary = matched.primary || Boolean(sameFlow && prev.primary);
+        if (replace && (!sameFlow || envId !== prev.envId || primary !== Boolean(prev.primary))) {
+          tabState.lastMatchedRequest = { envId, flowId: matched.flowId, primary };
           changed = true;
         }
       }
@@ -220,11 +269,16 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       if (!changed) return;
       save();
       if (details.tabId === state.initiatorTabId) sendTokenToApp();
-      chrome.tabs
+      return chrome.tabs
         .get(details.tabId)
         .then(updateActionForTab)
         .catch(() => {});
-    });
+  });
+}
+
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  (details) => {
+    handleApiRequest(details);
   },
   { urls: ["https://*.api.flow.microsoft.com/*", "https://*.api.powerplatform.com/*"] },
   ["requestHeaders"]

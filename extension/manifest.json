@@ -2,8 +2,8 @@
    "manifest_version": 3,
    "name": "FlowKit for Power Automate",
    "short_name": "FlowKit",
-   "version": "1.6",
-   "description": "Edit, debug and document Power Automate flows: JSON editor, run history, review before save, connector overview and docs export.",
+   "version": "1.7",
+   "description": "Edit, debug and document Power Automate and Copilot Studio agent flows: JSON editor, run history, review before save and docs.",
    "icons": {
       "16": "icons/icon-16.png",
       "32": "icons/icon-32.png",
@@ -30,6 +30,7 @@
       "*://*.make.powerautomate.com/",
       "*://*.make.powerapps.com/",
       "*://*.api.powerplatform.com/",
+      "*://*.copilotstudio.microsoft.com/",
       "https://*.logic.azure.com/*"
    ]
 }
