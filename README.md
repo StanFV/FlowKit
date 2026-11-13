@@ -2,7 +2,7 @@
   <img src="design/icon-256.png" alt="FlowKit icon" width="96" height="96">
 </p>
 
-<h1 align="center">FlowKit for Power Automate</h1>
+<h1 align="center">FlowKit</h1>
 
 <p align="center">
   Edit, debug and document your Power Automate cloud flows and Copilot Studio agent flows from a single browser extension.
