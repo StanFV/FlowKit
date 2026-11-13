@@ -60,7 +60,7 @@ Download the result as HTML (opens in Word) or Markdown. The documentation is cu
 If you see a message asking you to refresh the page, refresh the tab with the flow in Power Automate and click the icon again.
 
 ### Copilot Studio agent flows
-FlowKit also works with agent flows in [Copilot Studio](https://copilotstudio.microsoft.com). Open an agent flow in the designer and click the FlowKit icon. Because the page addresses in Copilot Studio differ from those in Power Automate, FlowKit recognises the flow from the requests the designer makes. If the icon stays inactive, wait until the designer has fully loaded. Support for agent flows is new; please report any problems as an issue.
+FlowKit also works with agent flows in [Copilot Studio](https://copilotstudio.microsoft.com). Open an agent flow in the designer and click the FlowKit icon. Because the page addresses in Copilot Studio differ from those in Power Automate, FlowKit recognises the flow from the requests the designer makes. If the icon stays inactive, wait until the designer has fully loaded. For agent flows the connector overview and documentation take into account that agent flows are billed through Copilot Studio capacity instead of a Power Automate licence. Support for agent flows is new; please report any problems as an issue.
 
 ## Installation
 FlowKit is available in the Edge extension store: https://microsoftedge.microsoft.com/addons/detail/flowkit-for-power-automat/dnmgemfeoliemchipdahobicmelkdkoh. But you can also install it as follows:

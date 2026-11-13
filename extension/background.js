@@ -159,7 +159,7 @@ chrome.action.onClicked.addListener((tab) => {
     save();
     const url = `${chrome.runtime.getURL("app.html")}?envId=${encodeURIComponent(
       flow.envId
-    )}&flowId=${encodeURIComponent(flow.flowId)}`;
+    )}&flowId=${encodeURIComponent(flow.flowId)}${isCopilotStudioUrl(tab.url) ? "&source=copilotstudio" : ""}`;
     chrome.tabs.create({ url, index: tab.index + 1 }, (appTab) => {
       state.appTabId = appTab.id;
       save();
