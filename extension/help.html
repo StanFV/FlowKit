@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlowKit</title>
+    <link rel="icon" href="icons/icon-32.png" />
+    <style>
+      body { margin: 0; background: #f5f6fa; color: #323130; font-family: "Segoe UI", -apple-system, Roboto, "Helvetica Neue", sans-serif; font-size: 15px; line-height: 1.5; }
+      main { max-width: 680px; margin: 48px auto; padding: 0 20px; }
+      header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+      header img { width: 48px; height: 48px; }
+      h1 { font-size: 24px; margin: 0; }
+      h2 { font-size: 16px; margin: 0 0 8px; }
+      .card { background: #fff; border-radius: 8px; padding: 18px 22px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+      .warn { border-left: 4px solid #d29200; }
+      ol, ul { margin: 6px 0; padding-left: 22px; }
+      li { margin: 4px 0; }
+      table { border-collapse: collapse; width: 100%; font-size: 14px; }
+      td { padding: 5px 0; vertical-align: top; }
+      td:first-child { color: #605e5c; width: 190px; }
+      code { background: #f3f2f1; padding: 1px 5px; border-radius: 3px; font-size: 13px; word-break: break-all; }
+      button { font: inherit; font-size: 14px; background: #2b3fd6; color: #fff; border: 0; border-radius: 4px; padding: 7px 16px; cursor: pointer; margin-top: 10px; }
+      button:hover { background: #1f30b0; }
+      .ok { color: #107c10; }
+      .no { color: #a4262c; }
+      [hidden] { display: none; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="icons/icon-128.png" alt="" />
+        <h1>No flow found on this page</h1>
+      </header>
+
+      <div class="card warn" id="access" hidden>
+        <h2>FlowKit does not have access to all sites it needs</h2>
+        <p>Your browser limits FlowKit to specific sites. Without access to the sites below, FlowKit cannot detect your flows or read them.</p>
+        <ul id="missing"></ul>
+        <button id="grant">Allow access</button>
+        <p id="granted" class="ok" hidden>Access granted. Reload the tab with your flow and click the FlowKit icon again.</p>
+      </div>
+
+      <div class="card">
+        <h2>How to open a flow</h2>
+        <ol>
+          <li>Open a cloud flow in <a href="https://make.powerautomate.com" target="_blank" rel="noopener">Power Automate</a> (its details page or the designer), or an agent flow in the <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Copilot Studio</a> designer.</li>
+          <li>Wait until the flow has loaded. The FlowKit icon turns from grey to coloured.</li>
+          <li>Click the FlowKit icon again.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>What FlowKit sees on that tab</h2>
+        <table>
+          <tr><td>Page</td><td id="page"></td></tr>
+          <tr><td>Flow recognised</td><td class="no">No</td></tr>
+          <tr><td>Power Automate session</td><td id="session"></td></tr>
+        </table>
+      </div>
+    </main>
+    <script src="access.js"></script>
+    <script src="help.js"></script>
+  </body>
+</html>

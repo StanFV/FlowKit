@@ -64,10 +64,12 @@ FlowKit knows when a flow comes from Copilot Studio. The connector overview and 
 
 ## Usage
 1. Open a flow in [Power Automate](https://make.powerautomate.com), for example its details page or the designer, or open an agent flow in the [Copilot Studio](https://copilotstudio.microsoft.com) designer.
-2. Click the FlowKit icon in your browser toolbar. The icon is only active on a page that shows a flow.
+2. Click the FlowKit icon in your browser toolbar. The icon is coloured on a page that shows a flow and grey elsewhere. Clicking the grey icon opens a help page that shows what FlowKit sees on the tab.
 3. The flow opens in a new tab with the editor and all tools.
 
-If you see a message asking you to refresh the page, refresh the tab with the flow and click the icon again. In Copilot Studio FlowKit recognises the flow once the designer has loaded it, so if the icon stays inactive, wait a moment until the designer has fully loaded.
+If you see a message asking you to refresh the page, refresh the tab with the flow and click the icon again. In Copilot Studio FlowKit recognises the flow once the designer has loaded it, so if the icon stays grey, wait a moment until the designer has fully loaded.
+
+If your browser limits FlowKit to specific sites (in Edge: "Allow on specific sites"), FlowKit cannot read your flows. The help page and the editor then show which sites are missing, with a button to allow access.
 
 ## Installation
 FlowKit is available in the Edge extension store: https://microsoftedge.microsoft.com/addons/detail/flowkit-for-power-automat/dnmgemfeoliemchipdahobicmelkdkoh. But you can also install it as follows:
