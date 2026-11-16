@@ -1165,8 +1165,40 @@
 .pat-diff{flex:1;min-height:0}
 .pat-modal-footer{display:flex;align-items:center;gap:8px;padding:12px 20px;border-top:1px solid #edebe9}
 .pat-preview{width:100%;height:calc(100vh - 220px);border:1px solid #edebe9;background:#fff}
+.pat-access{display:flex;align-items:center;gap:16px;padding:10px 16px;background:#fff4ce;color:#5c3c00;font-family:'Segoe UI',-apple-system,Roboto,sans-serif;font-size:14px;border-bottom:1px solid #f3d27a}
 `;
   document.head.appendChild(el("style", {}, css));
+
+  // Without access to the Power Automate sites the editor never receives a
+  // session token, which otherwise only shows up as "Please refresh".
+  if (window.FlowKitAccess) {
+    window.FlowKitAccess.missing().then((missing) => {
+      if (!missing.length) return;
+      const banner = el(
+        "div",
+        { className: "pat-access" },
+        el(
+          "span",
+          { className: "pat-grow" },
+          `Your browser limits FlowKit to specific sites. FlowKit needs access to: ${missing.map(window.FlowKitAccess.label).join(", ")}.`
+        ),
+        button(
+          "Allow access",
+          async () => {
+            try {
+              if (await window.FlowKitAccess.request(missing)) {
+                banner.textContent = "Access granted. Refresh the tab with your flow, then click the FlowKit icon again.";
+              }
+            } catch (e) {
+              // the user closed the prompt
+            }
+          },
+          true
+        )
+      );
+      document.body.prepend(banner);
+    });
+  }
 
   window.PATools = {
     setContext(values) {

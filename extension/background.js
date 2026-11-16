@@ -98,14 +98,42 @@ function resolveFlow(tab) {
   return getFlowFromTabUrl(tab && tab.url) || fromRequest();
 }
 
+const ICONS_ON = { 16: "icons/icon-16.png", 32: "icons/icon-32.png" };
+const ICONS_OFF = { 16: "icons/icon-16-off.png", 32: "icons/icon-32-off.png" };
+
+// The button is never disabled: a disabled action makes Chromium (Edge in
+// particular) open the extension's context menu on click instead of telling
+// the extension. A grey icon shows that no flow was recognised and a click
+// then opens a help page.
 function updateActionForTab(tab) {
   if (!tab || tab.id === undefined || tab.id < 0) return;
-  if (tab.id === state.appTabId) return;
-  if (resolveFlow(tab)) {
-    chrome.action.enable(tab.id).catch(() => {});
-  } else {
-    chrome.action.disable(tab.id).catch(() => {});
+  const found = tab.id !== state.appTabId && Boolean(resolveFlow(tab));
+  chrome.action.enable(tab.id).catch(() => {});
+  chrome.action.setIcon({ tabId: tab.id, path: found ? ICONS_ON : ICONS_OFF }).catch(() => {});
+  chrome.action
+    .setTitle({
+      tabId: tab.id,
+      title: found ? "FlowKit: open this flow" : "FlowKit: open a flow in Power Automate or Copilot Studio",
+    })
+    .catch(() => {});
+}
+
+function isExtensionPage(url) {
+  return typeof url === "string" && url.startsWith(chrome.runtime.getURL(""));
+}
+
+function openHelp(tab) {
+  const params = new URLSearchParams();
+  try {
+    const url = new URL(tab.url);
+    params.set("host", url.hostname);
+    params.set("path", url.pathname);
+  } catch (e) {
+    // no access to the tab URL
   }
+  const tabState = state.tabs[tab.id] || {};
+  params.set("api", tabState.apiToken ? "1" : "0");
+  chrome.tabs.create({ url: `${chrome.runtime.getURL("help.html")}?${params}`, index: tab.index + 1 });
 }
 
 function refreshAllTabs() {
@@ -140,7 +168,8 @@ function sendTokenToApp() {
     .catch(() => {});
 }
 
-chrome.action.disable();
+// Undo the disabled state earlier versions set.
+chrome.action.enable().catch(() => {});
 
 chrome.runtime.onStartup.addListener(() => {
   ready.then(refreshAllTabs);
@@ -153,8 +182,12 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.action.onClicked.addListener((tab) => {
   if (tab.id === undefined) return;
   ready.then(() => {
+    if (isExtensionPage(tab.url)) return;
     const flow = resolveFlow(tab);
-    if (!flow) return;
+    if (!flow) {
+      openHelp(tab);
+      return;
+    }
     state.initiatorTabId = tab.id;
     save();
     const url = `${chrome.runtime.getURL("app.html")}?envId=${encodeURIComponent(
